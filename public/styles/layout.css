@@ -19,6 +19,8 @@ body {
   color: #244751;
   background-color: #eee;
   font-family: 'Roboto'
+  display: flex;
+  z-index: 20;
 }
 
 /*
@@ -26,8 +28,11 @@ body {
  */
 
  main {
+/*  margin-top: 140px;
+  padding: 2em;*/
   padding-top: 140px;
-  max-width: 450px;
+  width: 450px;
   background-color: white;
   margin: auto
+  /*height: 450px;*/
  }
