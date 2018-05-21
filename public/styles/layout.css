@@ -18,9 +18,9 @@ body {
   margin: 0;
   color: #244751;
   background-color: #eee;
-  font-family: 'Roboto'
   display: flex;
   z-index: 20;
+  font-family: 'Roboto', sans-serif;
 }
 
 /*
