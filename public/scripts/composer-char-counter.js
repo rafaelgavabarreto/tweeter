@@ -1,8 +1,8 @@
 $(document).ready(function() {
   $('.new-tweet').on('keyup', '#compose textarea', function() {
-    var charType = $(this).val().length;
-    var charLeft = 140 - charType;
-    var counter = $(this).siblings('span');
+    const charType = $(this).val().length;
+    const charLeft = 140 - charType;
+    const counter = $(this).siblings('span');
 
     counter.text(charLeft);
 

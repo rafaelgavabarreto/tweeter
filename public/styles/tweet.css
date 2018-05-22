@@ -10,7 +10,7 @@
   margin-left: 2em;
   margin-right: 2em;
   margin-top: 2em;
-  margin-bottom: 2em;
+  /*margin-bottom: 2em;*/
 }
 
 .tweet img {
@@ -27,7 +27,7 @@
 .tweet header {
   display: flex;
   background-color: darkgray;
-  border-top: solid #bdbdbd 0px;
+  border-top: darkgray;
   border-radius: 5px;
   justify-content: space-between;
   height: 70px;
@@ -63,6 +63,8 @@
 .tweet footer {
   border-top: solid 1px gray;
   height: 45px;
+  display: flex;
+  justify-content: space-between;
 }
 
 .tweet footer p {
@@ -70,6 +72,7 @@
   margin-left: 15px;
 }
 
+/* COUNTER */
 .tweet footer span {
   margin-top: 15px;
   margin-right: 5px;
