@@ -72,8 +72,6 @@ $(document).ready(function() {
 
     event.preventDefault();
 
-    console.log(validator($(this).find("textarea").val()));
-
     // Using the function to validade the information inside the tweet
     if (validator($(this).find("textarea").val())) {
       $.ajax({
