@@ -52,14 +52,30 @@ const data = [{
 
 $(document).ready(function() {
 
+  // function to validate the tweet if has more than 140 chars and if is not blank
+  function validator(tweet) {
+    if (tweet === "") {
+      $('.counter').tweet("Error: You need write something in tweet to post!");
+      return false;
+    } else {
+      if (tweet.length > 140) {
+        $('.counter').tweet("Error: Oww too long, only 140 characters ok?");
+        return false;
+      } else {
+        return true;
+      }
+    }
+  }
 
   // Ajax - to get and send information to the page without change the page
   $('.container .new-tweet form').submit(function(event) {
 
     event.preventDefault();
 
+    console.log(validator($(this).find("textarea").val()));
+
     // Using the function to validade the information inside the tweet
-    if (valider($(this).find("textarea").val())) {
+    if (validator($(this).find("textarea").val())) {
       $.ajax({
         url: $(this).attr('action'),
         type: $(this).attr('method'),
@@ -84,6 +100,12 @@ $(document).ready(function() {
     });
   }
 
+  function escape(str) {
+    var div = document.createElement('div');
+    div.appendChild(document.createTextNode(str));
+    return div.innerHTML;
+  }
+
   // Function to create the Tweet Elements
   function createTweetElement(tweetObj) {
 
@@ -97,7 +119,7 @@ $(document).ready(function() {
         </header>
         <div class="tweetBody">
           <p>
-            ${tweetObj.content.text}
+            ${escape(tweetObj.content.text)}
           </p>
         </div>
         <footer>
@@ -114,20 +136,7 @@ $(document).ready(function() {
 
   }
 
-  // function to validate the tweet if has more than 140 chars and if is not blank
-  function valider(tweet) {
-    if (tweet === "") {
-      $('.counter').tweet("Error: You need write something in tweet to post!");
-      return false;
-    } else {
-      if (text.length > 140) {
-        $('.counter').tweet("Error: Oww too long, only 140 characters ok?");
-        return false;
-      } else {
-        return true;
-      }
-    }
-  }
+
 
   // Function to rendenize the tweets
   function renderTweets(tweets) {
