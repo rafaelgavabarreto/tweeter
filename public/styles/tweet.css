@@ -59,6 +59,9 @@
   margin-right: 15px;
   margin-top: 15px;
 }
+.container .counter {
+  float: right;
+}
 
 .tweet footer {
   border-top: solid 1px gray;
@@ -77,6 +80,7 @@
   margin-top: 15px;
   margin-right: 5px;
   color: white;
+  /*position: relative;*/
 }
 
 .tweet footer span i {
