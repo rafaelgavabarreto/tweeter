@@ -1,16 +1,14 @@
 .tweet {
   flex-direction: column;
   display: flex;
-  background-color: lightgray;
+  background-color: white;
   border-radius: 5px;
   border-color: darkgray;
   border-style: solid;
   border-width: 1px;
-  padding: 0.5em;
   margin-left: 2em;
   margin-right: 2em;
   margin-top: 2em;
-  /*margin-bottom: 2em;*/
 }
 
 .tweet img {
@@ -26,18 +24,15 @@
 
 .tweet header {
   display: flex;
-  background-color: darkgray;
+  background-color: lightgray;
   border-top: darkgray;
-  border-radius: 5px;
   justify-content: space-between;
   height: 70px;
 }
 
 .tweet header h1 {
   font-size: 1.5em;
-  color: #6b6c6f;
-  padding-right: 40px;
-  margin-top: 15px;
+  color: gray;
   margin: auto;
   width: 200px;
 }
@@ -55,10 +50,9 @@
 
 .tweet .tweetBody p {
   font-size: 1em;
-  margin-left: 15px;
-  margin-right: 15px;
-  margin-top: 15px;
+  margin-left: 5px;
 }
+
 .container .counter {
   float: right;
 }
@@ -79,10 +73,19 @@
 .tweet footer span {
   margin-top: 15px;
   margin-right: 5px;
-  color: white;
-  /*position: relative;*/
+  color: #00a087;
+  display: none;
 }
 
 .tweet footer span i {
   margin-left: 4px;
+}
+
+.tweet:hover {
+  border: solid gray 2px;
+}
+
+.tweet:hover footer span {
+  color: solid gray;
+  display: initial;
 }

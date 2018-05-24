@@ -31,20 +31,17 @@
 
 .new-tweet textarea {
   min-width: 100%;
-  min-height: 4em;
-  height: 4em;
-    max-height:  4em;
-  width: 100%;
   max-width: 100%;
+  min-height: 4em;
+  max-height:  4em;
   padding: 5px;
 }
 
 .new-tweet form {
-  padding: 2 rem;
+  padding: 1 rem;
 }
 
 .new-tweet input {
-
   width: 100px;
   max-width: 100px;
   height: 30px;
@@ -52,16 +49,24 @@
   margin-top: 10px;
 }
 
-/*
-    <main class="container">
+#compose {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 0;
+}
 
-      <section class="new-tweet">
-        <h2>Compose Tweet</h2>
-        <form method="POST" action="/tweets">
-          <textarea name="text" placeholder="What are you humming about?"></textarea>
-          <input type="submit" value="Tweet">
-          <span class="counter">140</span>
-        </form>
-      </section>
+#compose span {
+  margin-top: 10px;
+}
 
-    </main>*/
+#compose span.counter {
+  float: right;
+  margin-top: 0;
+  padding-top: 18px;
+  padding-right: 2px;
+}
+
+#new-tweet-area {
+  height: 4em;
+}
+
