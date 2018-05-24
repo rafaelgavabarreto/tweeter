@@ -30,8 +30,12 @@
 }
 
 .new-tweet textarea {
+  min-width: 100%;
+  min-height: 4em;
   height: 4em;
+    max-height:  4em;
   width: 100%;
+  max-width: 100%;
   padding: 5px;
 }
 
@@ -42,7 +46,9 @@
 .new-tweet input {
 
   width: 100px;
+  max-width: 100px;
   height: 30px;
+  max-height: 30px;
   margin-top: 10px;
 }
 
