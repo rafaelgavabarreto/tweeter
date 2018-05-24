@@ -57,9 +57,8 @@ function createTweetElement(tweetObj) {
         <footer>
           <p>${escape(changeTime(tweetObj.created_at))}</p>
           <span>
-            <i class="fas fa-flag"></i>
-            <i class="fas fa-retweet"></i>
-            <i class="fas fa-heart"></i>
+            <div class="fas fa-flag"></div>
+            <div class="fas fa-retweet"></div>
           </span>
         </footer>
         `);
@@ -67,13 +66,16 @@ function createTweetElement(tweetObj) {
   return $tweet;
 
 }
+            // <div id="like" data-id = ${escape(tweet._id)} class="fas fa-heart"></div>
+            // <div id="likeNum" data-id = ${escape(tweet._id)}>0</div>
 
 function changeTime(date) {
   var currentDate = Date.now();
   var seconds = (currentDate - date) / 1000;
   var minutes = (currentDate - date) / 1000 / 60;
   var hours = (currentDate - date) / 1000 / 60 / 60;
-  if (minutes < 1) {
+  console.log(seconds,minutes,hours,Date.now());
+  if (seconds < 60) {
     return `${Math.floor(seconds)} seconds ago`;
   } else {
     if (minutes > 1 && minutes < 60) {
@@ -110,6 +112,23 @@ function loadTweets(data) {
     }
   });
 }
+
+// $("#tweets").on("click", "#like", function(event) {
+
+//       const id = $(this).data().id;
+//       const element = $(this);
+
+//        $.ajax({url: `tweets/${id}/like`,
+//                 method: "PUT",
+//                   success: toggleLike
+//                 });
+
+//     function toggleLike(res){
+//       element.toggleClass("toggled");
+//       $(`[data-id=${id}]:last`).text(res);
+//     }
+//   });
+
 
 $(document).ready(function() {
   $(".new-tweet").hide();

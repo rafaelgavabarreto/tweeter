@@ -27,5 +27,41 @@ module.exports = function makeDataHelpers(db) {
   },
 
 
+    likeTweets: function(id, personWhoLiked, callback){
+      db.collection('tweets').findOne({ "_id": ObjectId(id) },(err, tweet) => {
+        if(tweet.peopleWhoLiked.indexOf(personWhoLiked) === -1){ // if he is not there
+
+          db.collection('tweets') // update db
+          .updateOne({ "_id": ObjectId(id) },
+           { $inc: {likes: 1}, $push: {peopleWhoLiked: personWhoLiked}}, {}, (err, result) => {
+            if(err){
+              callback(err, null);
+            }
+              callback(null,result);
+           });
+        } else {
+          db.collection('tweets')
+          .updateOne({ "_id": ObjectId(id) },
+           { $inc: {likes: -1}, $pull: {peopleWhoLiked: personWhoLiked}}, {}, (err, result) => {
+            if(err){
+              callback(err, null);
+            }
+              callback(null,result);
+          });
+        }
+      });
+    },
+
+    getTweetLikes: function(id, callback){
+      db.collection('tweets').findOne({ "_id": ObjectId(id) }, (err, tweet) => {
+        if(err){
+          callback(err, null);
+        } else {
+          callback(null, tweet.likes);
+      }
+    });
+   }
+  };
+}
 
 };
