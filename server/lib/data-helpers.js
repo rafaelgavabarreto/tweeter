@@ -26,5 +26,5 @@ module.exports = function makeDataHelpers(db) {
         callback(null, tweets.sort(sortNewestFirst));
       });
     },
-  };
-}
+
+};
