@@ -53,7 +53,7 @@ function createTweetElement(tweetObj) {
           </p>
         </div>
         <footer>
-          <p>${new Date(tweetObj.created_at)}</p>
+          <p>${changeTime(tweetObj.created_at)}</p>
           <span>
             <i class="fa fa-flag" aria-hidden="true"></i>
             <i class="fa fa-retweet" aria-hidden="true"></i>
@@ -73,6 +73,25 @@ function renderTweets(tweets) {
     $createHtml.prepend(createTweetElement(tweet));
   });
   $(".tweets-container").html($createHtml);
+}
+
+function changeTime(date) {
+  var currentDate = Date.now();
+  var seconds = (currentDate - date) / 1000 / 60;
+  var minutes = (currentDate - date) / 1000 / 60;
+  var hours = (currentDate - date) / 1000 / 60 / 60;
+  if (minutes < 1) {
+    return `${Math.floor(seconds)} seconds ago`;
+  } else { if (minutes > 1 && minutes < 60) {
+      return `${Math.floor(minutes)} minutes ago`;
+    } else { if (minutes > 60 && hours < 24) {
+        return `${Math.floor(hours)} hours ago`;
+      } else { if (hours > 24) {
+          return `${Math.floor(hours / 24)} days ago`;
+        }
+      }
+    }
+  }
 }
 
 // Function to send the information to the web site
