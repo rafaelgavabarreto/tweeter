@@ -4,18 +4,17 @@
  * Reminder: Use (and do all your DOM work in) jQuery's document ready function
  */
 
-
 function handleComposeSubmit(event) {
   event.preventDefault();
 
   var formDataStr = $(this).serialize();
   var tweetText = $(this).find("textarea").val();
-
+console.log($(this).serialize());
 
   if (tweetText === '') {
-    return window.alert("Error: You need write something in tweet to post!");
+    return $('.counter').tweet("Error: You need write something in tweet to post!");
   } else if (tweetText.length > 140) {
-    return window.alert("Error: Oww tooo long, only 140 characters ok?");
+    return $('.counter').tweet("Error: Oww tooo long, only 140 characters ok?");
   } else {
     $.ajax({
       url: "tweets",
@@ -24,15 +23,15 @@ function handleComposeSubmit(event) {
       success: function(body) {
 
         $('.container .new-tweet form')[0].reset();
-        $('.counter').text(140);
-        loadTweets();
-      }
+            $('.counter').text(140);
+              loadTweets($(this).serialize());
+            }
     });
   }
 }
 
 function escape(str) {
-  let div = document.createElement('div');
+  var div = document.createElement('div');
   div.appendChild(document.createTextNode(str));
   return div.innerHTML;
 }
@@ -42,12 +41,11 @@ function createTweetElement(tweetObj) {
 
   const $tweet = $('<article>').addClass('tweet');
 
-  // Protection for all the fields in case the user try to change dynamically
   $tweet.append(`
         <header>
-          <img src=${escape(tweetObj.user.avatars.small)} alt="userAvatar" />
-          <h1>${escape(tweetObj.user.name)}</h1>
-          <h2>${escape(tweetObj.user.handle)}</h2>
+          <img src=${tweetObj.user.avatars.small} alt="userAvatar" />
+          <h1>${tweetObj.user.name}</h1>
+          <h2>${tweetObj.user.handle}</h2>
         </header>
         <div class="tweetBody">
           <p>
@@ -55,10 +53,11 @@ function createTweetElement(tweetObj) {
           </p>
         </div>
         <footer>
-          <p>${escape(changeTime(tweetObj.created_at))}</p>
+          <p>${changeTime(tweetObj.created_at)}</p>
           <span>
-            <div class="fas fa-flag"></div>
-            <div class="fas fa-retweet"></div>
+            <i class="fa fa-flag" aria-hidden="true"></i>
+            <i class="fa fa-retweet" aria-hidden="true"></i>
+            <i class="fa fa-heart" aria-hidden="true"></i>
           </span>
         </footer>
         `);
@@ -66,15 +65,12 @@ function createTweetElement(tweetObj) {
   return $tweet;
 
 }
-            // <div id="like" data-id = ${escape(tweet._id)} class="fas fa-heart"></div>
-            // <div id="likeNum" data-id = ${escape(tweet._id)}>0</div>
 
 function changeTime(date) {
   var currentDate = Date.now();
   var seconds = (currentDate - date) / 1000;
   var minutes = (currentDate - date) / 1000 / 60;
   var hours = (currentDate - date) / 1000 / 60 / 60;
-  console.log(seconds,minutes,hours,Date.now());
   if (seconds < 60) {
     return `${Math.floor(seconds)} seconds ago`;
   } else {
@@ -95,11 +91,12 @@ function changeTime(date) {
 // Function to rendenize the tweets
 function renderTweets(tweets) {
   const $createHtml = $('<div>');
+  console.log(tweets);
   tweets.forEach((tweet) => {
     $createHtml.prepend(createTweetElement(tweet));
   });
   $(".tweets-container").html($createHtml);
-
+  console.log($(".tweets-container").html($createHtml));
 }
 
 // Function to send the information to the web site
@@ -107,27 +104,12 @@ function loadTweets(data) {
   $.ajax({
     url: "/tweets",
     method: "GET",
+        // dataType: "json",
     success: function(data) {
-      renderTweets(data);
+      renderTweets(data)
     }
   });
 }
-
-// $("#tweets").on("click", "#like", function(event) {
-
-//       const id = $(this).data().id;
-//       const element = $(this);
-
-//        $.ajax({url: `tweets/${id}/like`,
-//                 method: "PUT",
-//                   success: toggleLike
-//                 });
-
-//     function toggleLike(res){
-//       element.toggleClass("toggled");
-//       $(`[data-id=${id}]:last`).text(res);
-//     }
-//   });
 
 
 $(document).ready(function() {
@@ -135,8 +117,6 @@ $(document).ready(function() {
   loadTweets();
   $('#compose').on('submit', handleComposeSubmit);
   $("button").click(function() {
-    $(".new-tweet").slideToggle();
-    $('.new-tweet textarea').focus();
-    loadTweets();
+    $(".new-tweet").slideToggle("fast", function() {});
   });
 });
