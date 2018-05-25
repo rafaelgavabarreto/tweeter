@@ -9,7 +9,6 @@ function handleComposeSubmit(event) {
 
   var formDataStr = $(this).serialize();
   var tweetText = $(this).find("textarea").val();
-console.log($(this).serialize());
 
   if (tweetText === '') {
     return $('.counter').tweet("Error: You need write something in tweet to post!");
@@ -90,13 +89,9 @@ function changeTime(date) {
 
 // Function to rendenize the tweets
 function renderTweets(tweets) {
-  const $createHtml = $('<div>');
-  console.log(tweets);
   tweets.forEach((tweet) => {
-    $createHtml.prepend(createTweetElement(tweet));
+    $(".tweets-container").prepend(createTweetElement(tweet));
   });
-  $(".tweets-container").html($createHtml);
-  console.log($(".tweets-container").html($createHtml));
 }
 
 // Function to send the information to the web site
@@ -104,7 +99,6 @@ function loadTweets(data) {
   $.ajax({
     url: "/tweets",
     method: "GET",
-        // dataType: "json",
     success: function(data) {
       renderTweets(data)
     }

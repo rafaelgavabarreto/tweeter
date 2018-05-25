@@ -2,19 +2,40 @@
 
 // Basic express setup:
 require('dotenv').config();
-
-
 const PORT = 8080;
 const express = require("express");
 const bodyParser = require("body-parser");
 const app = express();
 
+// Basic database setup
 const MongoClient = require("mongodb").MongoClient;
 // const MONGODB_URI = process.env.MONGODB_URI;
 const MONGODB_URI = 'mongodb://localhost:27017/tweeter';
 
+
+// // Starting the scss
+const nodeSassMiddleware = require('node-sass-middleware');
+const path = require('path');
+
+app.use(nodeSassMiddleware({
+    src: path.join(__dirname, '../public/styles/scss'),
+    // src: path.join(__dirname, '../public/styles/scss'),
+    dest: path.join(__dirname, '../public/styles/css'),
+    // dest: path.join(__dirname, '../public/styles/css'),
+    debug: true,
+    prefix: '/styles/css'
+    // outputStyle: 'compressed',
+    // indentedSyntax : false
+}));
+
+// console.log(path.join(__dirname, '../public')
+//   ,path.join(__dirname, '../public/styles'));
+app.use(express.static(path.join(__dirname, '../public')));
+
+// Finished starting scss
+
 app.use(bodyParser.urlencoded({ extended: true }));
-app.use(express.static("public"));
+// app.use(express.static("public"));
 
 
 // The in-memory database of tweets. It's a basic object with an array in it.

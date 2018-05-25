@@ -1,0 +1,49 @@
+body {
+
+  #nav-bar {
+    position: fixed;
+    width: 100%;
+    background-color: #00a087;
+    color: #e8fdff;
+    top: 0;
+    padding-left: 2em;
+    padding-right: 2em;
+    .logo {
+      width: 80px;
+      height: 80px;
+      margin-right: 10px;
+      float: left;
+    }
+    .header {
+      float: left;
+      text-align: center;
+      font-size: 200%;
+      line-height: 2.5;
+    }
+    .compose {
+      float: right;
+      height: 50px;
+      margin-top: 14px;
+      border-radius: 8px;
+      background: #F5F5F5;
+      border: solid black 2px;
+      cursor: pointer;
+    }
+    button {
+      float: right;
+      width: 140px;
+      height: 60px;
+      font-size: 1.5em;
+      color: green;
+      border: solid black 1.7px;
+      border-radius: 4px;
+      background-color: white;
+      margin-top: 10px;
+      &:hover {
+        color: solid green;
+        background-color: white;
+        cursor: pointer;
+      }
+    }
+  }
+}

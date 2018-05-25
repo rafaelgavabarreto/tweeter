@@ -30,14 +30,16 @@
   height: 70px;
 }
 
-.tweet header h1 {
+/*.tweet header h1 {*/
+#tweet header .user-name {
   font-size: 1.5em;
   color: gray;
   margin: auto;
   width: 200px;
 }
 
-.tweet header h2 {
+#tweet header .user-id
+/*.tweet header h2*/ {
   font-size: 1em;
   font-weight: 100;
   color: black;
@@ -70,7 +72,8 @@
 }
 
 /* COUNTER */
-.tweet footer span {
+/*.tweet footer span*/
+.tweet footer div {
   margin-top: 15px;
   margin-right: 5px;
   color: #00a087;
