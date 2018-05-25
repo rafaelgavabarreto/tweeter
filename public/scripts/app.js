@@ -1,8 +1,9 @@
-/*
- * Client-side JS logic goes here
- * jQuery is already loaded
- * Reminder: Use (and do all your DOM work in) jQuery's document ready function
- */
+/**************************************************
+Program: Tweeter Clone
+Developer: Rafael Barreto
+Start date: May 21
+End Date: May 25
+**************************************************/
 
 function handleComposeSubmit(event) {
   event.preventDefault();
@@ -11,9 +12,9 @@ function handleComposeSubmit(event) {
   var tweetText = $(this).find("textarea").val();
 
   if (tweetText === '') {
-    return $('.counter').tweet("Error: You need write something in tweet to post!");
+    return window.alert("Error: You need write something in tweet to post!");
   } else if (tweetText.length > 140) {
-    return $('.counter').tweet("Error: Oww tooo long, only 140 characters ok?");
+    return window.alert("Error: Oww tooo long, only 140 characters ok?");
   } else {
     $.ajax({
       url: "tweets",
@@ -29,6 +30,7 @@ function handleComposeSubmit(event) {
   }
 }
 
+//Function to previne script attack from html
 function escape(str) {
   var div = document.createElement('div');
   div.appendChild(document.createTextNode(str));
@@ -42,9 +44,9 @@ function createTweetElement(tweetObj) {
 
   $tweet.append(`
         <header>
-          <img src=${tweetObj.user.avatars.small} alt="userAvatar" />
-          <h1>${tweetObj.user.name}</h1>
-          <h2>${tweetObj.user.handle}</h2>
+          <img src=${escape(tweetObj.user.avatars.small)} alt="userAvatar" />
+          <h1>${escape(tweetObj.user.name)}</h1>
+          <h2>${escape(tweetObj.user.handle)}</h2>
         </header>
         <div class="tweetBody">
           <p>
@@ -52,7 +54,7 @@ function createTweetElement(tweetObj) {
           </p>
         </div>
         <footer>
-          <p>${changeTime(tweetObj.created_at)}</p>
+          <p>${escape(changeTime(tweetObj.created_at))}</p>
           <span>
             <i class="fa fa-flag" aria-hidden="true"></i>
             <i class="fa fa-retweet" aria-hidden="true"></i>
@@ -62,9 +64,9 @@ function createTweetElement(tweetObj) {
         `);
 
   return $tweet;
-
 }
 
+// Function read the date in milliseconds and change to seconds, minutes, hours and days
 function changeTime(date) {
   var currentDate = Date.now();
   var seconds = (currentDate - date) / 1000;
@@ -105,7 +107,7 @@ function loadTweets(data) {
   });
 }
 
-
+// Read of control the new tweeters
 $(document).ready(function() {
   $(".new-tweet").hide();
   loadTweets();

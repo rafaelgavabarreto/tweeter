@@ -9,8 +9,10 @@
   margin-left: 2em;
   margin-right: 2em;
   margin-top: 2em; }
-  .tweet:hover span {
-    visibility: visible; }
+  .tweet:hover {
+    border: solid gray; }
+    .tweet:hover span {
+      visibility: visible; }
   .tweet header {
     display: flex;
     background-color: lightgray;
@@ -57,12 +59,7 @@
     color: #00a087;
     margin-right: 8px;
     margin-top: 12px;
-    visibility: hidden;
-    /*display: none;*/ }
+    visibility: hidden; }
 
 .container .counter {
   float: right; }
-
-/*:hover */
-/*    border: solid gray 2px;*/
-/*display: initial;*/

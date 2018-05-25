@@ -1,3 +1,10 @@
+/**************************************************
+Program: Tweeter Clone
+Developer: Rafael Barreto
+Start date: May 21
+End Date: May 25
+**************************************************/
+
 "use strict";
 
 // Basic express setup:
@@ -19,27 +26,19 @@ const path = require('path');
 
 app.use(nodeSassMiddleware({
     src: path.join(__dirname, '../public/styles/scss'),
-    // src: path.join(__dirname, '../public/styles/scss'),
     dest: path.join(__dirname, '../public/styles/css'),
-    // dest: path.join(__dirname, '../public/styles/css'),
     debug: true,
     prefix: '/styles/css'
-    // outputStyle: 'compressed',
-    // indentedSyntax : false
 }));
 
-// console.log(path.join(__dirname, '../public')
-//   ,path.join(__dirname, '../public/styles'));
 app.use(express.static(path.join(__dirname, '../public')));
-
 // Finished starting scss
 
 app.use(bodyParser.urlencoded({ extended: true }));
-// app.use(express.static("public"));
 
 
 // The in-memory database of tweets. It's a basic object with an array in it.
-// const db = require("./lib/in-memory-db");
+const db = require("./lib/in-memory-db");
 
 MongoClient.connect(MONGODB_URI, (err, db) => {
   if (err) {
