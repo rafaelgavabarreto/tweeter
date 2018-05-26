@@ -17,3 +17,12 @@ Tweeter is a simple, single-page Twitter clone. Tiny clone from tweeter where wi
 - Node 5.10.x or above
 - Mongo
 - node-sass-middleware
+
+
+## Screen shots
+
+!["Compousing a new tweeter"](https://github.com/rafaelgavabarreto/tweeter/blob/master/img/Compose.png)
+
+
+!["Read a list of tweeters"](https://github.com/rafaelgavabarreto/tweeter/blob/master/img/Main%20screen.png)
+
