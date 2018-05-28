@@ -17,7 +17,6 @@ Tweeter is a simple, single-page Twitter clone. Tiny clone from tweeter where wi
 - Node 5.10.x or above
 - Mongo
 - node-sass-middleware
-- moment
 
 
 ## Screen shots
