@@ -8,7 +8,7 @@ End Date: May 25
 "use strict";
 
 // Basic express setup:
-require('dotenv').config();
+// require('dotenv').config();
 const PORT = 8080;
 const express = require("express");
 const bodyParser = require("body-parser");
@@ -16,7 +16,7 @@ const app = express();
 
 // Basic database setup
 const MongoClient = require("mongodb").MongoClient;
-// const MONGODB_URI = process.env.MONGODB_URI;
+
 const MONGODB_URI = 'mongodb://localhost:27017/tweeter';
 
 

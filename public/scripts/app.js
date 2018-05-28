@@ -11,7 +11,8 @@ function handleComposeSubmit(event) {
   var formDataStr = $(this).serialize();
   var tweetText = $(this).find("textarea").val();
 
-  if (tweetText === '') {
+
+  if (tweetText === '' || tweetText.split(' ').join('').length === 0) {
     return window.alert("Error: You need write something in tweet to post!");
   } else if (tweetText.length > 140) {
     return window.alert("Error: Oww tooo long, only 140 characters ok?");
@@ -21,14 +22,23 @@ function handleComposeSubmit(event) {
       method: "POST",
       data: $(this).serialize(),
       success: function(body) {
-
-        $('.container .new-tweet form')[0].reset();
+        $.ajax({
+          url: "/tweets",
+          method: "GET",
+          success: function(data) {
+            data.forEach((tweet) => {
+              $(".tweets-container").prepend(createTweetElement(tweet));
+            });
+            $('.container .new-tweet form')[0].reset();
             $('.counter').text(140);
-              loadTweets($(this).serialize());
-            }
+          }
+        });
+      }
     });
   }
 }
+
+
 
 //Function to previne script attack from html
 function escape(str) {
@@ -54,7 +64,7 @@ function createTweetElement(tweetObj) {
           </p>
         </div>
         <footer>
-          <p>${escape(changeTime(tweetObj.created_at))}</p>
+          <p>${escape(moment(tweetObj.created_at).fromNow())}</p>
           <span>
             <i class="fa fa-flag" aria-hidden="true"></i>
             <i class="fa fa-retweet" aria-hidden="true"></i>
@@ -64,29 +74,6 @@ function createTweetElement(tweetObj) {
         `);
 
   return $tweet;
-}
-
-// Function read the date in milliseconds and change to seconds, minutes, hours and days
-function changeTime(date) {
-  var currentDate = Date.now();
-  var seconds = (currentDate - date) / 1000;
-  var minutes = (currentDate - date) / 1000 / 60;
-  var hours = (currentDate - date) / 1000 / 60 / 60;
-  if (seconds < 60) {
-    return `${Math.floor(seconds)} seconds ago`;
-  } else {
-    if (minutes > 1 && minutes < 60) {
-      return `${Math.floor(minutes)} minutes ago`;
-    } else {
-      if (minutes > 60 && hours < 24) {
-        return `${Math.floor(hours)} hours ago`;
-      } else {
-        if (hours > 24) {
-          return `${Math.floor(hours / 24)} days ago`;
-        }
-      }
-    }
-  }
 }
 
 // Function to rendenize the tweets
@@ -114,5 +101,6 @@ $(document).ready(function() {
   $('#compose').on('submit', handleComposeSubmit);
   $("button").click(function() {
     $(".new-tweet").slideToggle("fast", function() {});
+    $(".new-tweet textarea").focus();
   });
 });
