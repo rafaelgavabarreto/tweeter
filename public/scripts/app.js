@@ -8,9 +8,7 @@ End Date: May 25
 function handleComposeSubmit(event) {
   event.preventDefault();
 
-  var formDataStr = $(this).serialize();
   var tweetText = $(this).find("textarea").val();
-
 
   if (tweetText === '' || tweetText.split(' ').join('').length === 0) {
     return window.alert("Error: You need write something in tweet to post!");
@@ -21,24 +19,15 @@ function handleComposeSubmit(event) {
       url: "tweets",
       method: "POST",
       data: $(this).serialize(),
-      success: function(body) {
-        $.ajax({
-          url: "/tweets",
-          method: "GET",
-          success: function(data) {
-            data.forEach((tweet) => {
-              $(".tweets-container").prepend(createTweetElement(tweet));
-            });
-            $('.container .new-tweet form')[0].reset();
-            $('.counter').text(140);
-          }
-        });
+      success: function(data) {
+        loadTweets(data);
+        $('.container .new-tweet form')[0].reset();
+        $('.counter').text(140);
+        $(".new-tweet textarea").focus();
       }
     });
   }
 }
-
-
 
 //Function to previne script attack from html
 function escape(str) {
@@ -76,27 +65,23 @@ function createTweetElement(tweetObj) {
   return $tweet;
 }
 
-// Function to rendenize the tweets
-function renderTweets(tweets) {
-  tweets.forEach((tweet) => {
-    $(".tweets-container").prepend(createTweetElement(tweet));
-  });
-}
-
 // Function to send the information to the web site
 function loadTweets(data) {
   $.ajax({
     url: "/tweets",
     method: "GET",
     success: function(data) {
-      renderTweets(data)
+      data.forEach((tweet) => {
+        $(".tweets-container").prepend(createTweetElement(tweet));
+      });
     }
   });
 }
 
-// Read of control the new tweeters
+// This function load when the page is access or reload
 $(document).ready(function() {
   $(".new-tweet").hide();
+  $('.tweets-container').empty();
   loadTweets();
   $('#compose').on('submit', handleComposeSubmit);
   $("button").click(function() {

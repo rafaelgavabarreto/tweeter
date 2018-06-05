@@ -22,7 +22,8 @@
     max-width: 100%;
     min-height: 70px;
     max-height: 70px;
-    padding: 5px; }
+    padding: 5px;
+    word-wrap: break-word; }
   .new-tweet form {
     padding: 1 rem; }
   .new-tweet input {
